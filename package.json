@@ -1,0 +1,19 @@
+{
+  "name": "node-mongo-api-fase2",
+  "version": "1.0.0",
+  "description": "API Node.js con Express y MongoDB Atlas para usuarios, categorias, productos y pedidos.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"No hay pruebas configuradas\" && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.4"
+  }
+}
