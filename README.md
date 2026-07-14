@@ -1,6 +1,6 @@
 # API Node MongoDB Fase2
 
-API creada con Node.js, Express y MongoDB Atlas para consultar e insertar datos de:
+API creada con Node.js, Express y MongoDB Atlas para consultar, insertar, actualizar y eliminar datos de:
 
 - Usuarios
 - Categorias
@@ -34,15 +34,37 @@ npm start
 ```txt
 GET  /api/usuarios
 POST /api/usuarios
+PUT  /api/usuarios/:id
+DELETE /api/usuarios/:id
 
 GET  /api/categorias
 POST /api/categorias
+PUT  /api/categorias/:id
+DELETE /api/categorias/:id
 
 GET  /api/productos
 POST /api/productos
+PUT  /api/productos/:id
+DELETE /api/productos/:id
 
 GET  /api/pedidos
 POST /api/pedidos
+PUT  /api/pedidos/:id
+DELETE /api/pedidos/:id
+PATCH /api/v1/actualizar-estado/:id
 ```
 
-Las pruebas de ejemplo estan en `test.http`.
+El endpoint `PATCH` actualiza unicamente el estado de un pedido. Los estados
+permitidos son `pendiente`, `pagado`, `procesado` y `finalizado`. Un pedido que
+ya se encuentre `finalizado` no se puede modificar.
+
+Las pruebas de ejemplo estan en `tests/test.http`.
+
+## Estructura del proyecto
+
+```txt
+src/       Codigo fuente y rutas de la API
+data/      Archivos JSON de los ejercicios
+scripts/   Scripts para preparar MongoDB
+tests/     Peticiones HTTP para probar la API
+```

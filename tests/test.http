@@ -14,6 +14,16 @@ GET http://localhost:3000/api/pedidos
 
 ###
 
+POST http://localhost:3000/api/categorias
+Content-Type: application/json
+
+{
+    "nombre": "Deportes",
+    "descripcion": "Articulos deportivos y accesorios"
+}
+
+###
+
 POST http://localhost:3000/api/productos
 Content-Type: application/json
 
@@ -21,21 +31,14 @@ Content-Type: application/json
     "nombre": "Audifonos bluetooth",
     "categoria": "Tecnologia",
     "precio": 85000,
-    "stock": 10,
-    "activo": true,
-    "proveedor": {
-        "nombre": "TecnoProveedor",
-        "nit": "900111222-1"
-    },
-    "comentarios": []
+    "stock": 10
 }
 
-###
+### Actualizar solamente el estado de un pedido
 
-POST http://localhost:3000/api/categorias
+PATCH http://localhost:3000/api/v1/actualizar-estado/000000000000000000000000
 Content-Type: application/json
 
 {
-    "nombre": "Deportes",
-    "descripcion": "Articulos deportivos y accesorios"
+    "estado": "procesado"
 }
