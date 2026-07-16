@@ -63,7 +63,10 @@ Las pruebas de ejemplo estan en `tests/test.http`.
 ## Estructura del proyecto
 
 ```txt
-src/       Codigo fuente y rutas de la API
+src/
+  models/       Esquemas y modelos de Mongoose
+  controllers/ Logica de cada recurso
+  routes/      Definicion de endpoints
 data/      Archivos JSON de los ejercicios
 scripts/   Scripts para preparar MongoDB
 tests/     Peticiones HTTP para probar la API

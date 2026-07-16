@@ -34,6 +34,33 @@ Content-Type: application/json
     "stock": 10
 }
 
+### PRUEBA DE VALIDACION: producto sin el campo obligatorio precio
+
+POST http://localhost:3000/api/productos
+Content-Type: application/json
+
+{
+    "nombre": "Producto sin precio",
+    "categoria": "Tecnologia",
+    "stock": 5
+}
+
+### Actualizar un recurso (cambia la ruta para probar los otros modulos)
+
+PUT http://localhost:3000/api/productos/000000000000000000000000
+Content-Type: application/json
+
+{
+    "nombre": "Audifonos bluetooth actualizados",
+    "precio": 90000,
+    "categoria": "Tecnologia",
+    "stock": 15
+}
+
+### Eliminar un recurso (cambia la ruta para probar los otros modulos)
+
+DELETE http://localhost:3000/api/productos/000000000000000000000000
+
 ### Actualizar solamente el estado de un pedido
 
 PATCH http://localhost:3000/api/v1/actualizar-estado/000000000000000000000000

@@ -5,7 +5,7 @@ require('dotenv').config();
 const usuariosRoutes = require('./src/routes/usuarios');
 const categoriasRoutes = require('./src/routes/categorias');
 const productosRoutes = require('./src/routes/productos');
-const { router: pedidosRoutes, actualizarEstado } = require('./src/routes/pedidos');
+const { router: pedidosRoutes, estadoRouter } = require('./src/routes/pedidos');
 
 const app = express();
 app.use(express.json());
@@ -28,7 +28,7 @@ app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/categorias', categoriasRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/pedidos', pedidosRoutes);
-app.patch('/api/v1/actualizar-estado/:id', actualizarEstado);
+app.use('/api/v1', estadoRouter);
 
 app.listen(PORT, () => {
     console.log(`El backend esta escuchando en localhost:${PORT}`);
