@@ -1,7 +1,7 @@
 const Producto = require('../models/Producto');
 
 const obtenerProductos = async (req, res) => {
-    try { res.json(await Producto.find()); }
+    try { res.json(await Producto.find().populate('categoria')); }
     catch (error) { res.status(500).json({ error: 'Error al consultar los productos' }); }
 };
 

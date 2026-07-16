@@ -58,6 +58,10 @@ El endpoint `PATCH` actualiza unicamente el estado de un pedido. Los estados
 permitidos son `pendiente`, `pagado`, `procesado` y `finalizado`. Un pedido que
 ya se encuentre `finalizado` no se puede modificar.
 
+El campo `categoria` de un producto debe contener el `_id` de una categoria.
+Al consultar productos, Mongoose completa esa referencia con los datos de la
+categoria mediante `populate`.
+
 Las pruebas de ejemplo estan en `tests/test.http`.
 
 ## Estructura del proyecto
