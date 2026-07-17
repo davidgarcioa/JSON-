@@ -1,71 +1,130 @@
-GET http://localhost:3000/api/usuarios
+### Estado del servidor
+GET https://json-beta-rose.vercel.app/
 
-###
-
-GET http://localhost:3000/api/categorias
-
-###
-
-GET http://localhost:3000/api/productos
-
-###
-
-GET http://localhost:3000/api/pedidos
-
-###
-
-POST http://localhost:3000/api/categorias
+### Crear usuario
+# @name crearUsuario
+POST https://json-beta-rose.vercel.app/api/usuarios
 Content-Type: application/json
 
 {
-    "nombre": "Deportes",
-    "descripcion": "Articulos deportivos y accesorios"
+  "nombre": "David Garcia",
+  "email": "david.prueba@example.com",
+  "password": "123456"
 }
 
-###
+### Consultar usuarios
+GET https://json-beta-rose.vercel.app/api/usuarios
 
-POST http://localhost:3000/api/productos
+### Actualizar usuario creado
+PUT https://json-beta-rose.vercel.app/api/usuarios/{{crearUsuario.response.body.$.id_generado}}
 Content-Type: application/json
 
 {
-    "nombre": "Audifonos bluetooth",
-    "categoria": "000000000000000000000000",
-    "precio": 85000,
-    "stock": 10
+  "nombre": "David Garcia Actualizado",
+  "email": "david.actualizado@example.com",
+  "password": "654321"
 }
 
-### PRUEBA DE VALIDACION: producto sin el campo obligatorio precio
-
-POST http://localhost:3000/api/productos
+### Crear categoria
+# @name crearCategoria
+POST https://json-beta-rose.vercel.app/api/categorias
 Content-Type: application/json
 
 {
-    "nombre": "Producto sin precio",
-    "categoria": "000000000000000000000000",
-    "stock": 5
+  "nombre": "Tecnologia",
+  "descripcion": "Equipos y accesorios tecnologicos"
 }
 
-### Actualizar un recurso (cambia la ruta para probar los otros modulos)
+### Consultar categorias
+GET https://json-beta-rose.vercel.app/api/categorias
 
-PUT http://localhost:3000/api/productos/000000000000000000000000
+### Actualizar categoria creada
+PUT https://json-beta-rose.vercel.app/api/categorias/{{crearCategoria.response.body.$.id_generado}}
 Content-Type: application/json
 
 {
-    "nombre": "Audifonos bluetooth actualizados",
-    "precio": 90000,
-    "categoria": "000000000000000000000000",
-    "stock": 15
+  "nombre": "Tecnologia y accesorios",
+  "descripcion": "Equipos, componentes y accesorios tecnologicos"
 }
 
-### Eliminar un recurso (cambia la ruta para probar los otros modulos)
-
-DELETE http://localhost:3000/api/productos/000000000000000000000000
-
-### Actualizar solamente el estado de un pedido
-
-PATCH http://localhost:3000/api/v1/actualizar-estado/000000000000000000000000
+### Crear producto usando la categoria creada
+# @name crearProducto
+POST https://json-beta-rose.vercel.app/api/productos
 Content-Type: application/json
 
 {
-    "estado": "procesado"
+  "nombre": "Audifonos bluetooth",
+  "precio": 85000,
+  "categoria": "{{crearCategoria.response.body.$.id_generado}}",
+  "stock": 10
 }
+
+### Consultar productos (incluye populate de categoria)
+GET https://json-beta-rose.vercel.app/api/productos
+
+### Actualizar producto creado
+PUT https://json-beta-rose.vercel.app/api/productos/{{crearProducto.response.body.$.id_generado}}
+Content-Type: application/json
+
+{
+  "nombre": "Audifonos bluetooth actualizados",
+  "precio": 90000,
+  "categoria": "{{crearCategoria.response.body.$.id_generado}}",
+  "stock": 15
+}
+
+### Crear pedido
+# @name crearPedido
+POST https://json-beta-rose.vercel.app/api/pedidos
+Content-Type: application/json
+
+{
+  "usuarioEmail": "david.actualizado@example.com",
+  "productos": [
+    {
+      "productoId": "{{crearProducto.response.body.$.id_generado}}",
+      "cantidad": 2
+    }
+  ],
+  "total": 180000,
+  "estado": "pendiente"
+}
+
+### Consultar pedidos
+GET https://json-beta-rose.vercel.app/api/pedidos
+
+### Actualizar pedido creado
+PUT https://json-beta-rose.vercel.app/api/pedidos/{{crearPedido.response.body.$.id_generado}}
+Content-Type: application/json
+
+{
+  "usuarioEmail": "david.actualizado@example.com",
+  "productos": [
+    {
+      "productoId": "{{crearProducto.response.body.$.id_generado}}",
+      "cantidad": 2
+    }
+  ],
+  "total": 180000,
+  "estado": "pagado"
+}
+
+### Actualizar solamente el estado del pedido
+PATCH https://json-beta-rose.vercel.app/api/v1/actualizar-estado/{{crearPedido.response.body.$.id_generado}}
+Content-Type: application/json
+
+{
+  "estado": "procesado"
+}
+
+### Eliminar pedido creado
+DELETE https://json-beta-rose.vercel.app/api/pedidos/{{crearPedido.response.body.$.id_generado}}
+
+### Eliminar producto creado
+DELETE https://json-beta-rose.vercel.app/api/productos/{{crearProducto.response.body.$.id_generado}}
+
+### Eliminar categoria creada
+DELETE https://json-beta-rose.vercel.app/api/categorias/{{crearCategoria.response.body.$.id_generado}}
+
+### Eliminar usuario creado
+DELETE https://json-beta-rose.vercel.app/api/usuarios/{{crearUsuario.response.body.$.id_generado}}
